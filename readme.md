@@ -3,7 +3,7 @@
 ### wizzair_test.py  
 Test rejestracji nowego użytkownika na stronie [https://wizzair.com/pl-pl#/](https://wizzair.com/pl-pl#/)
 
-Testowane przepadki testowe:
+Testowane przypadki testowe:
 
 * I Rejestracja z błędnie wprowadzonym adresem e-mail.
 
