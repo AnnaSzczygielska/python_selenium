@@ -33,6 +33,8 @@ from selenium import webdriver
 #from selenium.webdriver.support import expected_conditions as EC
 #from selenium.webdriver.support.select import Select
 
+choosed_country = "Polska"
+choosed_country_code = "Polska (+48)"
 
 class RejestracjaWizzair(unittest.TestCase):
 
@@ -67,12 +69,12 @@ class RejestracjaWizzair(unittest.TestCase):
 
 # 6. Wybierz kod kraju
         code_to_choose = self.driver.find_element_by_xpath('//div[@data-test="booking-register-country-code"]').click()
-        codes_list = self.driver.find_elements_by_xpath('//ul[@class="phone-number__calling-code-selector__dropdown phone-number__calling-code-selector__dropdown--covering"]/li')
+        codes_list = self.driver.find_elements_by_xpath('//ul[@class="phone-number__calling-code-selector__dropdown"]/li')
         #countries = code_list.find_elements_by_tag_name("li")
 
         for li in codes_list:
-            code = li.find_element_by_xpath('//div[@class="phone-number__calling-code-selector__dropdown__item__country"]')
-            if code.get_attribute("innerText") == "Polska (+48)":
+            code = li.find_element_by_tag_name('div')
+            if code.get_attribute("innerText") == choosed_country_code:
                 code.location_once_scrolled_into_view
                 time.sleep(10)
                 code.click()
@@ -93,12 +95,12 @@ class RejestracjaWizzair(unittest.TestCase):
 
 # 10. Wybierz narodowość
         country_to_choose = self.driver.find_element_by_xpath('//input[@data-test="booking-register-country"]').click()
-        countries_list = self.driver.find_elements_by_xpath('//div[@data-test="register-form__country-container__locations"]/label')
+        countries_list = self.driver.find_elements_by_xpath('//div[@class="register-form__country-container__locations"]/label')
         #countries = code_list.find_elements_by_tag_name("li")
 
         for label in countries_list:
-            country = label.find_elements_by_tag_name('strong')
-            if country.get_attribute("innerText") == "Polska":
+            country = label.find_element_by_tag_name('strong')
+            if country.get_attribute("innerText") == choosed_country:
                 country.location_once_scrolled_into_view
                 country.click()
                 break
