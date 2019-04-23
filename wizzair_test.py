@@ -68,18 +68,19 @@ class RejestracjaWizzair(unittest.TestCase):
 # 6. Wybierz kod kraju
         #country_code_button = self.driver.find_element_by_name("phone-number-country-code")
         #country_code_button.click()
-
-        code_to_choose = self.driver.find_element_by_xpath('//div[@data-test="booking-register-country-code"]').click()
-        code_list = self.driver.find_elements_by_xpath('//ul[@class="phone-number__calling-code-selector__dropdown phone-number__calling-code-selector__dropdown--covering"]/li')
+#
+#        code_to_choose = self.driver.find_element_by_xpath('//div[@data-test="booking-register-country-code"]').click()
+#        codes_list = self.driver.find_elements_by_xpath('//ul[@class="phone-number__calling-code-selector__dropdown phone-number__calling-code-selector__dropdown--covering"]/li')
         #countries = code_list.find_elements_by_tag_name("li")
 
-        for li in code_list:
-            code = li.find_element_by_xpath('//div[@class="phone-number__calling-code-selector__dropdown__item__country"]')
-            if code.get_attribute("innerText") == "Polska (+48)":
-                code.location_once_scrolled_into_view
-                time.sleep(10)
-                code.click()
-                break
+#        for li in codes_list:
+#            code = li.find_element_by_xpath('//div[@class="phone-number__calling-code-selector__dropdown__item__country"]')
+#            if code.get_attribute("innerText") == "Polska (+48)":
+#                code.location_once_scrolled_into_view
+#                time.sleep(10)
+#                code.click()
+#                break
+
 
         #code = self.driver.find_element_by_xpath('//div[contains(text(), "PL")]')
         #self.driver.execute_script("arguments[0].focus();", code)
@@ -88,16 +89,28 @@ class RejestracjaWizzair(unittest.TestCase):
 
 # 7. Wprowadź numer telefonu
         #phone_number = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(By.NAME, "phoneNumberValidDigits"))
-        phone_number = self.driver.find_element_by_name("phoneNumberValidDigits")
-        phone_number.send_keys("666777888")
-# 8. Wprowadź e-mail bez znaku małpa
+        phone_number_field = self.driver.find_element_by_name("phoneNumberValidDigits")
+        phone_number_field.send_keys("666777888")
 
+# 8. Wprowadź e-mail bez znaku małpa
+        incorrect_email_field = self.driver.find_element_by_xpath('//input[@data-test="booking-register-email"]')
+        incorrect_email_field.send_keys("alina.linawp.pl")
 
 # 9. Wprowadź hasło
-
+        password_field = self.driver.find_element_by_xpath('//input[@data-test="booking-register-password"]')
+        password_field.send_keys("haslo123")
 
 # 10. Wybierz narodowość
+        country_to_choose = self.driver.find_element_by_xpath('//input[@data-test="booking-register-country"]').click()
+        countries_list = self.driver.find_elements_by_xpath('//div[@data-test="register-form__country-container__locations"]/label')
+        #countries = code_list.find_elements_by_tag_name("li")
 
+        for label in countries_list:
+            country = label.find_elements_by_tag_name('strong')
+            if country.get_attribute("innerText") == "Polska":
+                country.location_once_scrolled_into_view
+                country.click()
+                break
 
 # 11. Akceptuj politykę prywatności
 
@@ -111,5 +124,5 @@ class RejestracjaWizzair(unittest.TestCase):
 
         time.sleep(2)
 
-#if __name__ == '__main__':
-#    unittest.main(verbosity=2)
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
