@@ -66,26 +66,17 @@ class RejestracjaWizzair(unittest.TestCase):
         gender_button.click()
 
 # 6. Wybierz kod kraju
-        #country_code_button = self.driver.find_element_by_name("phone-number-country-code")
-        #country_code_button.click()
-#
-#        code_to_choose = self.driver.find_element_by_xpath('//div[@data-test="booking-register-country-code"]').click()
-#        codes_list = self.driver.find_elements_by_xpath('//ul[@class="phone-number__calling-code-selector__dropdown phone-number__calling-code-selector__dropdown--covering"]/li')
+        code_to_choose = self.driver.find_element_by_xpath('//div[@data-test="booking-register-country-code"]').click()
+        codes_list = self.driver.find_elements_by_xpath('//ul[@class="phone-number__calling-code-selector__dropdown phone-number__calling-code-selector__dropdown--covering"]/li')
         #countries = code_list.find_elements_by_tag_name("li")
 
-#        for li in codes_list:
-#            code = li.find_element_by_xpath('//div[@class="phone-number__calling-code-selector__dropdown__item__country"]')
-#            if code.get_attribute("innerText") == "Polska (+48)":
-#                code.location_once_scrolled_into_view
-#                time.sleep(10)
-#                code.click()
-#                break
-
-
-        #code = self.driver.find_element_by_xpath('//div[contains(text(), "PL")]')
-        #self.driver.execute_script("arguments[0].focus();", code)
-
-
+        for li in codes_list:
+            code = li.find_element_by_xpath('//div[@class="phone-number__calling-code-selector__dropdown__item__country"]')
+            if code.get_attribute("innerText") == "Polska (+48)":
+                code.location_once_scrolled_into_view
+                time.sleep(10)
+                code.click()
+                break
 
 # 7. Wprowadź numer telefonu
         #phone_number = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(By.NAME, "phoneNumberValidDigits"))
@@ -113,9 +104,12 @@ class RejestracjaWizzair(unittest.TestCase):
                 break
 
 # 11. Akceptuj politykę prywatności
-
+        privacy_policy = self.driver.find_element_by_xpath('//label[@for="registration-privacy-policy-checkbox"][@class="rf-checkbox__label"]')
+        privacy_policy.click()
 
 # 12. Kliknij ZAREJESTRUJ SIĘ
+        register_button = self.driver.find_element_by_xpath('//button[@data-test="booking-register-submit"]')
+        register_button.click()
 
         self.driver.save_screenshot('screenshot_wizzair_test.png')
 
