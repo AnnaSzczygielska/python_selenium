@@ -114,6 +114,8 @@ class RejestracjaWizzair(unittest.TestCase):
         register_button.click()
 
         self.driver.save_screenshot('screenshot_wizzair_test.png')
+        self.assertEqual(visible_error_notices[0].text, u"Nieprawidłowy adres e-mail")
+        self.assertEqual(len(visible_error_notices), 1)
 
     def tearDown(self):
         self.driver.quit()
